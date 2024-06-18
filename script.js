@@ -25,8 +25,9 @@ const operate = function (n1, op, n2) {
     } else if (op === "-") {
         display.textContent = subtract(n1, n2);
     } else if (op === "x") {
+        console.log('yes')
         display.textContent =  multiply(n1, n2);
-    } else if (op ==="&#247;") {
+    } else if (op === "÷") {
         display.textContent = divide(n1, n2);
     } 
 };
@@ -38,6 +39,7 @@ const operator = document.querySelectorAll(".operator");
 const swap = document.querySelector("#swap");
 const equal = document.querySelector("#equal");
 const percentage = document.querySelector("#percentage");
+const del = document.querySelector("#del");
 
 let check = false;
 let lastClickedOperator = null;
@@ -97,6 +99,6 @@ percentage.addEventListener("click", () => {
     display.textContent = display.textContent / 100;
 });
 
-
-
-
+del.addEventListener("click", () => {
+    location.reload();
+});
