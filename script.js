@@ -42,24 +42,24 @@ const percentage = document.querySelector("#percentage");
 const del = document.querySelector("#del");
 
 let check = false;
+
 let lastClickedOperator = null;
-let previouslyClicked = false
+
+let previouslyClicked = 0;
 
 appear.forEach((button) => {
     button.addEventListener("click", () => {
-        if (check === false) {
+        if (check) {
+            display.textContent += button.textContent;  
+        } else {
             if (button.textContent === '.') {
                 display.textContent = "0.";
                 check = true;
             } else {
                 display.textContent = button.textContent;
                 check = true;
-            }
-            
-        } else {
-            display.textContent += button.textContent;
+            };
         };
-
         if (lastClickedOperator) {
             lastClickedOperator.style.backgroundColor = "orange";
         }
@@ -68,17 +68,16 @@ appear.forEach((button) => {
 
 operator.forEach((element) => {
     element.addEventListener("click", () => {
-        if (previouslyClicked) {
+        if (previouslyClicked % 2 === 0) {
+            n1 = display.textContent;
+            check = false;
+            op = element.textContent;
+            previouslyClicked++;
+        } else {
             operate(n1, op, n2);
             op = element.textContent;
             n1 = display.textContent;
-            previouslyClicked = false;
             check = false;
-        } else {
-            n1 = display.textContent;
-            check = false;
-            op = element.textContent;
-            previouslyClicked = true;
         }
         
         if (lastClickedOperator) {
@@ -101,8 +100,8 @@ swap.addEventListener("click", () => {
 });
 
 equal.addEventListener("click", () => {
-    
     operate(n1, op, n2);
+    previouslyClicked++;
 });
 
 
