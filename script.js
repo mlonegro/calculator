@@ -22,6 +22,10 @@ const multiply = function (num1, num2) {
 };
 
 const divide = function (num1, num2) {
+    if (num2 === '0') {
+        return "You're not that guy pal";
+    };
+    console.log(num2)
     let ans = num1 / num2;
     ans = parseFloat(ans.toPrecision(15));
     return ans;
@@ -55,14 +59,25 @@ let lastClickedOperator = null;
 
 let previouslyClicked = 0;
 
+let decimalClicked = false;
+
+
 appear.forEach((button) => {
     button.addEventListener("click", () => {
         if (check) {
-            display.textContent += button.textContent;  
+            if (button.textContent === '.') {
+                if (!decimalClicked) {
+                    display.textContent += button.textContent;
+                    decimalClicked = true;
+                };
+            } else {
+                display.textContent += button.textContent;
+            }; 
         } else {
             if (button.textContent === '.') {
                 display.textContent = "0.";
                 check = true;
+                decimalClicked = true;
             } else {
                 display.textContent = button.textContent;
                 check = true;
@@ -93,6 +108,7 @@ operator.forEach((element) => {
         }
         element.style.backgroundColor = "white";
         lastClickedOperator = element; 
+        decimalClicked = false;
         });
     });
 
@@ -108,8 +124,10 @@ swap.addEventListener("click", () => {
 });
 
 equal.addEventListener("click", () => {
-    operate(n1, op, n2);
-    previouslyClicked++;
+    if (check) {
+        operate(n1, op, n2);
+        previouslyClicked++;
+    };
 });
 
 
@@ -121,5 +139,3 @@ del.addEventListener("click", () => {
     location.reload();
 });
 
-// se puede comittear antes de necesitarse
-// Hacer previouslyClicked con even y odd para que sea algo eterno
