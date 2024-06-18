@@ -139,3 +139,9 @@ del.addEventListener("click", () => {
     location.reload();
 });
 
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Backspace") {
+        console.log("hello");
+        display.textContent = display.textContent.slice(0, -1);
+    };
+});
