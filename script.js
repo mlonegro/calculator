@@ -4,19 +4,27 @@ let n2 = 0;
 let displayValue = 0;
 
 const add = function (num1, num2) {
-    return Number(num1) + Number(num2);
+    let ans = Number(num1) + Number(num2);
+    ans = parseFloat(ans.toPrecision(15));
+    return ans;
 };
 
 const subtract = function (num1, num2) {
-    return num1 - num2;
+    let ans = num1 - num2;
+    ans = parseFloat(ans.toPrecision(15));
+    return ans;
 };
 
 const multiply = function (num1, num2) {
-    return num1 * num2;
+    let ans = num1 * num2;
+    ans = parseFloat(ans.toPrecision(15));
+    return ans;
 };
 
 const divide = function (num1, num2) {
-    return num1 / num2;
+    let ans = num1 / num2;
+    ans = parseFloat(ans.toPrecision(15));
+    return ans;
 };
 
 const operate = function (n1, op, n2) {
