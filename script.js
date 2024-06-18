@@ -20,15 +20,15 @@ const divide = function (num1, num2) {
 };
 
 const operate = function (n1, op, n2) {
-    if (op === '+') {
-        add(n1, n2);
-    } else if (op === '-') {
-        subtract(n1, n2);
-    } else if (op === '*') {
-        multiply(n1, n2);
-    } else {
-        divide(n1, n2);
-    }
+    if (op === "+") {
+        display.textContent = add(n1, n2);
+    } else if (op === "-") {
+        display.textContent = subtract(n1, n2);
+    } else if (op === "x") {
+        display.textContent =  multiply(n1, n2);
+    } else if (op ==="&#247;") {
+        display.textContent = divide(n1, n2);
+    } 
 };
 
 
@@ -71,11 +71,8 @@ operator.forEach((element) => {
         if (lastClickedOperator) {
             lastClickedOperator.style.backgroundColor = "orange";
         }
-
         element.style.backgroundColor = "white";
-
         lastClickedOperator = element; 
-
         });
     });
 
@@ -92,15 +89,7 @@ swap.addEventListener("click", () => {
 
 equal.addEventListener("click", () => {
     n2 = display.textContent;
-    if (op === "+") {
-        display.textContent = add(n1, n2);
-    } else if (op === "-") {
-        display.textContent = subtract(n1, n2);
-    } else if (op === "x") {
-        display.textContent =  multiply(n1, n2);
-    } else if (op ==="&#247;") {
-        display.textContent = divide(n1, n2);
-    } 
+    operate(n1, op, n2);
 });
 
 
