@@ -20,13 +20,13 @@ const divide = function (num1, num2) {
 };
 
 const operate = function (n1, op, n2) {
+    n2 = display.textContent;
     if (op === "+") {
         display.textContent = add(n1, n2);
     } else if (op === "-") {
         display.textContent = subtract(n1, n2);
     } else if (op === "x") {
-        console.log('yes')
-        display.textContent =  multiply(n1, n2);
+        display.textContent = multiply(n1, n2);
     } else if (op === "÷") {
         display.textContent = divide(n1, n2);
     } 
@@ -43,6 +43,7 @@ const del = document.querySelector("#del");
 
 let check = false;
 let lastClickedOperator = null;
+let previouslyClicked = false
 
 appear.forEach((button) => {
     button.addEventListener("click", () => {
@@ -67,9 +68,19 @@ appear.forEach((button) => {
 
 operator.forEach((element) => {
     element.addEventListener("click", () => {
-        n1 = display.textContent;
-        check = false;
-        op = element.textContent;
+        if (previouslyClicked) {
+            operate(n1, op, n2);
+            op = element.textContent;
+            n1 = display.textContent;
+            previouslyClicked = false;
+            check = false;
+        } else {
+            n1 = display.textContent;
+            check = false;
+            op = element.textContent;
+            previouslyClicked = true;
+        }
+        
         if (lastClickedOperator) {
             lastClickedOperator.style.backgroundColor = "orange";
         }
@@ -90,7 +101,7 @@ swap.addEventListener("click", () => {
 });
 
 equal.addEventListener("click", () => {
-    n2 = display.textContent;
+    
     operate(n1, op, n2);
 });
 
@@ -102,3 +113,6 @@ percentage.addEventListener("click", () => {
 del.addEventListener("click", () => {
     location.reload();
 });
+
+// se puede comittear antes de necesitarse
+// Hacer previouslyClicked con even y odd para que sea algo eterno
